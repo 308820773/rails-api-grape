@@ -5,6 +5,7 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.text :desc, comment: '说明'
       t.integer :user_id
       t.datetime :disabled_at
+      t.integer :lines_count
 
       t.timestamps
     end

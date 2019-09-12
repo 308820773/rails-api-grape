@@ -2,9 +2,14 @@ class User < ApplicationRecord
   has_secure_password
   rolify
 
+  # post
   action_store :favorite, :post, counter_cache: true, user_counter_cache: true # 收藏
   action_store :like, :post, counter_cache: true, user_counter_cache: true # 点赞
   action_store :unlike, :post, counter_cache: true, user_counter_cache: true # 点踩
+
+  # mark
+  action_store :like, :line, counter_cache: true, user_counter_cache: true # 点赞
+  action_store :unlike, :line, counter_cache: true, user_counter_cache: true # 点踩
 
   validates :email, presence: true, uniqueness: true
 
