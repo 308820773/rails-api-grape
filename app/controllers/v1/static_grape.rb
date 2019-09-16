@@ -3,5 +3,9 @@ module V1
     get '/about' do
       'pub page'
     end
+
+    desc '推荐'
+    get '/dashboard' do
+    end
   end
 end
