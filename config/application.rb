@@ -32,8 +32,15 @@ module GrapeApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.autoload_paths      += Dir[Rails.root.join('app', 'uploader', '**/')]
+
     config.i18n.load_path      += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :'zh-CN'
     config.time_zone           = 'Beijing'
+
+    config.active_job.queue_adapter = :sidekiq
+    config.cache_store              = :redis_store, ENV['REDIS_URL'] || 'redis://127.0.0.1:6379/0', { expires_in: 60.minutes }
+
+    config.middleware.use HttpStore::Middleware::RequestLog
   end
 end

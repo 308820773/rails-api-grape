@@ -2,7 +2,8 @@ class User < ApplicationRecord
   has_secure_password
   rolify
 
-  # post
+  has_one :files_avatar, :class_name => 'Files::Avatar', as: :fileable
+
   action_store :favorite, :post, counter_cache: true, user_counter_cache: true # 收藏
   action_store :like, :post, counter_cache: true, user_counter_cache: true # 点赞
   action_store :unlike, :post, counter_cache: true, user_counter_cache: true # 点踩
@@ -13,8 +14,14 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
 
+  after_create :create_file_avatar
+
   def payload
     slice(:id)
+  end
+
+  def avatar_url
+    files_avatar.file_url
   end
 
   def gen_code
@@ -22,5 +29,11 @@ class User < ApplicationRecord
 
     update!(code: rand(999_999))
     code
+  end
+
+  private
+
+  def create_file_avatar
+    Files::Avatar.create!(fileable: self)
   end
 end

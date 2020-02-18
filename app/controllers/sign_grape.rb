@@ -6,11 +6,8 @@ class SignGrape < BaseGrape
   before do
     parse_jwt
     pundit_authorize
+    set_papertrail_user(current_user.id)
   end
-
-  rescue_from(SignError) { |e| valid_error!(e) }
-  rescue_from(Svc::JwtSignature::SignError) { |e| auth_error!(e) }
-  rescue_from(Pundit::NotAuthorizedError) { |e| permit_error!(e) }
 
   # mounts
   mount V1::UsersGrape => '/v1/users'
