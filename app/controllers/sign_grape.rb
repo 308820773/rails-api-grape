@@ -11,4 +11,5 @@ class SignGrape < BaseGrape
 
   # mounts
   mount V1::UsersGrape => '/v1/users'
+  mount V1::TeamsGrape => '/v1/teams'
 end
