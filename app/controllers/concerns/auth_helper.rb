@@ -4,7 +4,7 @@ module AuthHelper
     raise SignError, '请登录' unless request.headers['Authorization']
 
     payload       = Svc::JwtSignature.verify!(request.headers['Authorization']).first
-    @current_user = User.build_with!(payload)
+    @current_user = User.find(payload['id'])
     raise SignError, '校验失败, 请退出重新登录' if @current_user.nil?
 
     @refresh_token = Svc::JwtSignature.refresh!(request.headers['Authorization'])
