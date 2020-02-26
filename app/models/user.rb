@@ -24,7 +24,7 @@ class User < ApplicationRecord
   end
 
   def name
-    nickname || user_accounts.map(&:name).compact.first
+    nickname || user_accounts.map(&:nickname).compact.first
   end
 
   def avatar_url

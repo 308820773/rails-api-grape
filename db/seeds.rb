@@ -8,14 +8,16 @@
 # rake db:drop && rake db:seed
 
 # User
-u1 = User.find_or_initialize_by email: '1@1.com', nickname: 'user1'
-u1.update_attributes password: '123123123'
+wechat_account = Svc::Sign.wechat('test1', {})
 
-u2 = User.find_or_initialize_by email: '2@1.com', nickname: 'user2'
-u2.update_attributes password: '123123123'
-
-u3 = User.find_or_initialize_by email: '3@1.com', nickname: 'user3'
-u3.update_attributes password: '123123123'
+#u1 = User.find_or_initialize_by email: '1@1.com', nickname: 'user1'
+#u1.update_attributes password: '123123123'
+#
+#u2 = User.find_or_initialize_by email: '2@1.com', nickname: 'user2'
+#u2.update_attributes password: '123123123'
+#
+#u3 = User.find_or_initialize_by email: '3@1.com', nickname: 'user3'
+#u3.update_attributes password: '123123123'
 
 ## Reprots
 #r1 = Report.find_or_create_by! title: 'WWE最具影响力的十大男选手', owner: u1, desc: '世界摔角娱乐（World Wrestling Entertainment）是一家世界级的体育娱乐（职业摔角）和媒体整合型上市公司，营业收入来源除了职业摔角比赛外，还包含电影、音乐、版权、行销等相关产业。'
