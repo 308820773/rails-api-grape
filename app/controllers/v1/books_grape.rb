@@ -19,7 +19,7 @@ module V1
     end
     post '/' do
       ActiveRecord::Base.transaction do
-        @book  = Book.create!({ user: current_user }.merge(params.book.to_hash))
+        @book = Book.create!({ user: current_user }.merge(params.book.to_hash))
 
         data_record!(@book, Entities::Book::Detail)
       end
@@ -62,21 +62,43 @@ module V1
         data!('删除成功')
       end
 
-      #添加标签
-      #删除标签
-      desc '购买学习集' do
+      desc '添加标签' do
         headers Authorization: {
           description: 'jwt token',
           required:    true
         }
-        summary '加入班级'
+        summary '添加标签'
+        success Entities::Book::Detail
+        detail 'post_books_id_tags?'
+        tags ['teams']
+      end
+      params do
+        requires :tag_name, type: String
+      end
+      post 'tags' do
+        tags = current_record.all_tags_list_on(:dir)
+        tags += [params.tag_name]
+
+        current_user.tag(current_record, with: stringify(tags), on: 'dir')
+        data!('添加成功')
+      end
+
+      desc '删除标签' do
+        headers Authorization: {
+          description: 'jwt token',
+          required:    true
+        }
+        summary '删除标签'
         success Entities::Team::Detail
         detail 'post_teams_id_join?'
         tags ['teams']
       end
-      post '/buy' do
-        current_record.members.create!(user: current_user)
-        data!('加入成功')
+      delete 'tags' do
+        tags = current_record.all_tags_list_on(:dir)
+        tags -= [params.tag_name]
+
+        current_user.tag(current_record, with: stringify(tags), on: 'dir')
+        data!('删除成功')
       end
     end
   end

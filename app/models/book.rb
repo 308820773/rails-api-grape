@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  acts_as_taggable_on
+  acts_as_taggable_on :dir
 
   has_many :cards
   has_many :team_books

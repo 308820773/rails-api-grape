@@ -11,5 +11,13 @@ module V1
     def delete_books_id?
       true
     end
+
+    def post_books_id_tags?
+      true
+    end
+
+    def delete_books_id_tags?
+      true
+    end
   end
 end

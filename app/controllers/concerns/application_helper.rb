@@ -65,4 +65,8 @@ module ApplicationHelper
 
     @file_object = file_class.create!(fileable: current_record, file: params_file)
   end
+
+  def stringify(tag_list)
+    tag_list.inject('') { |memo, tag| memo += (tag + ',') }[0..-1]
+  end
 end
