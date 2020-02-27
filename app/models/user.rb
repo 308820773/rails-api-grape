@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  acts_as_tagger
   rolify
 
   has_one :files_avatar, :class_name => 'Files::Avatar', as: :fileable
