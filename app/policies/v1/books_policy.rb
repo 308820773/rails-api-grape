@@ -4,6 +4,10 @@ module V1
       true
     end
 
+    def get_books_id?
+      true
+    end
+
     def put_books_id?
       true
     end

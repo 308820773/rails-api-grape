@@ -34,7 +34,7 @@ module V1
         summary '修改学习集'
         success Entities::Book::Detail
         detail 'put_books_id?'
-        tags ['teams']
+        tags ['books']
       end
       params do
         requires :book, type: Hash do
@@ -47,6 +47,20 @@ module V1
         data_record!(current_record, Entities::Book::Detail)
       end
 
+      desc '学习集详情' do
+        headers Authorization: {
+          description: 'jwt token',
+          required:    true
+        }
+        summary '学习集详情'
+        success Entities::Book::Detail
+        detail 'delete_teams_id?'
+        tags ['books']
+      end
+      get '/' do
+        data_record!(current_record, Entities::Book::Detail)
+      end
+
       desc '删除学习集' do
         headers Authorization: {
           description: 'jwt token',
@@ -55,7 +69,7 @@ module V1
         summary '删除学习集'
         success Entities::Book::Detail
         detail 'delete_teams_id?'
-        tags ['teams']
+        tags ['books']
       end
       delete '/' do
         current_record.destroy
@@ -70,7 +84,7 @@ module V1
         summary '添加标签'
         success Entities::Book::Detail
         detail 'post_books_id_tags?'
-        tags ['teams']
+        tags ['books']
       end
       params do
         requires :tag_name, type: String
@@ -91,7 +105,7 @@ module V1
         summary '删除标签'
         success Entities::Team::Detail
         detail 'post_teams_id_join?'
-        tags ['teams']
+        tags ['books']
       end
       delete 'tags' do
         tags = current_record.all_tags_list_on(:dir)

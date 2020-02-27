@@ -8,6 +8,10 @@ module V1
       true
     end
 
+    def get_teams_id?
+      true
+    end
+
     def delete_teams_id?
       true
     end

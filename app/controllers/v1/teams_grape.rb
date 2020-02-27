@@ -47,6 +47,20 @@ module V1
         data_record!(current_record, Entities::Team::Detail)
       end
 
+      desc '班级详情' do
+        headers Authorization: {
+          description: 'jwt token',
+          required:    true
+        }
+        summary '班级详情'
+        success Entities::Team::Detail
+        detail 'delete_teams_id?'
+        tags ['teams']
+      end
+      get '/' do
+        data_record!(current_record, Entities::Team::Detail)
+      end
+
       desc '删除班级' do
         headers Authorization: {
           description: 'jwt token',
